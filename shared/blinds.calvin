@@ -1,0 +1,18 @@
+/*
+This file specifies the ip->op mappings of the actors and
+forms an applications graph across multiple runtimes
+*/
+
+
+#Actors specs
+node0 : xyz.Emitter()
+node1 : kk.AverageActor(window_size=15)
+node2 : xyz.Emitterrr()
+#node3 : abc.Intensity()
+node4 : pq.Bayesian()
+node5 : io.Print()
+
+node0.data > node1.temp1
+node1.result > node4.temp
+node2.data2 > node4.intensity
+node4.out2 > node5.token

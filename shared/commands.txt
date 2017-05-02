@@ -1,0 +1,32 @@
+csruntime --host localhost --port 6000 --controlport 6001 --name runtime-0 &
+csruntime --host localhost --port 5002 --controlport 5003 --name runtime-1 &
+csruntime --host localhost --port 5004 --controlport 5005 --name runtime-2 &
+csruntime --host localhost --port 5006 --controlport 5007 --name runtime-3 &
+csruntime --host localhost --port 5008 --controlport 5009 --name runtime-4 &
+csruntime --host localhost --port 5010 --controlport 5011 --name runtime-5 &
+csruntime --host localhost --port 5012 --controlport 5013 --name runtime-6 &
+csruntime --host localhost --port 5014 --controlport 5015 --name runtime-7 &
+csruntime --host localhost --port 5016 --controlport 5017 --name runtime-8
+
+sudo kill -9 $(lsof -t -i:6000) &
+sudo kill -9 $(lsof -t -i:6001) &
+sudo kill -9 $(lsof -t -i:6002) &
+sudo kill -9 $(lsof -t -i:5003) &
+sudo kill -9 $(lsof -t -i:5004) &
+sudo kill -9 $(lsof -t -i:5005) &
+sudo kill -9 $(lsof -t -i:5006) &
+sudo kill -9 $(lsof -t -i:5007) &
+sudo kill -9 $(lsof -t -i:5008) &
+sudo kill -9 $(lsof -t -i:5009) &
+sudo kill -9 $(lsof -t -i:5010) &
+sudo kill -9 $(lsof -t -i:5011) &
+sudo kill -9 $(lsof -t -i:5012) &
+sudo kill -9 $(lsof -t -i:5013) &
+sudo kill -9 $(lsof -t -i:5014) &
+sudo kill -9 $(lsof -t -i:5015) &
+sudo kill -9 $(lsof -t -i:5016) &
+sudo kill -9 $(lsof -t -i:5017) 
+
+cscontrol http://localhost:6001 deploy --reqs deploy.deployjson deploy.calvin
+ps -eaf | grep csruntime
+cscontrol http://localhost:5009 deploy --reqs avgtest.deployjson avgtest.calvin

@@ -1,0 +1,7 @@
+Build Model
+Get unique class attributes
+map average to class attributes
+map std deviation to class attributes
+
+
+

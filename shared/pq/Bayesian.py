@@ -1,0 +1,59 @@
+from calvin.actor.actor import Actor, condition, manage
+from sklearn import tree
+import numpy as np
+class Bayesian(Actor):
+
+    """
+    Divides input on port 'dividend' with input on port 'divisor'
+    Inputs :
+        temp :
+	intensity :
+    Output :
+        out2 :
+    """
+
+    @manage(['clf_blinds'])
+    def init(self):
+        self.clf_blinds = tree.DecisionTreeRegressor()
+        self.blinds = [] 
+        self.temperatures = []   
+        self.mode = 'train'
+
+    @condition(action_input=['temp', 'intensity'], action_output=['out2'])
+    def tree(self, temperature, inten):
+	#print(inten)
+        if(temperature[1] == 'train'):
+            self.train(temperature[0], float(inten[0]))
+            self.mode = 'train'
+        else:
+            self.validate(temperature[0], float(inten[0]))
+        return ('',)
+
+    def train(self, temperature, inten):
+        if (temperature != 'ignore'):
+            self.temperatures.append([temperature, inten])
+            if (inten < 0.33):
+                self.blinds.append(2)
+            elif (float(temperature) < 70 and 0.67 >= inten >= 0.33):
+                self.blinds.append(2)
+            elif (float(temperature) < 70 and inten > 0.67):
+                self.blinds.append(0)
+            elif (float(temperature) > 70 and 0.67 >= inten >= 0.33):
+                self.blinds.append(1)
+            elif (float(temperature) > 70 and inten > 0.67):
+                self.blinds.append(0)
+	    else:
+		self.blinds.append(0)
+
+
+    def validate(self, temperature, inten):
+        if (self.mode == 'train'):
+	    #print(str(len(self.temperatures)))
+	    #print(str(len(self.blinds)))
+            self.clf_blinds = self.clf_blinds.fit(self.temperatures,self.blinds)
+            self.mode = 'validate'
+        print("temperature = ", str(temperature))
+        print("inten = ", inten)
+        print('Blind = ', str(self.clf_blinds.predict([[temperature,inten]])))
+
+    action_priority = (tree,)

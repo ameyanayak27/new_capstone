@@ -1,0 +1,56 @@
+/*
+This file specifies the ip->op mappings of the actors and
+forms an applications graph across multiple runtimes
+
+
+#Actors specs
+node0 : xyz.Emitter()
+node1 : kk.AverageActor(window_size=15)
+node2 : xyz.Emitter()
+node3 : kk.AverageActor(window_size=15)
+node4 : xyz.Emitter()
+node5 : kk.AverageActor(window_size=15)
+node6 : abc.AverageMultipleIn()
+node7 : pq.BuildTree()
+node8 : io.Print()
+
+node0.data > node1.temp1
+node1.result > node6.tem1
+node2.data > node3.temp1
+node3.result > node6.tem2
+node4.data > node5.temp1
+node5.result > node6.tem3
+node6.ip > node7.input
+node7.output > node8.token
+*/
+node0 : xyz.Emitter()
+node1 : kk.AverageActor(window_size=15)
+node2 : xyz.Emitter()
+node3 : kk.AverageActor(window_size=15)
+node4 : xyz.Emitter()
+node5 : kk.AverageActor(window_size=15)
+node6 : abc.AverageMultipleIn()
+node7 : pq.Distributed()
+node8 : xyz.Summarize()
+node9 : xyz.StdDeviation()
+node10 : xyz.Predict()
+node11 : io.Print()
+
+node0.data > node1.temp1
+node1.result > node6.tem1
+node2.data > node3.temp1
+node3.result > node6.tem2
+node4.data > node5.temp1
+node5.result > node6.tem3
+node6.ip > node7.input
+node7.temperatures > node8.dataset
+node7.heat > node8.attributes
+node7.flag > node8.ignore_flag1
+node8.dataset2 > node9.dataset3
+node8.mapp > node9.attr_map
+node8.ignore_flag2 > node9.ignore_flag3
+node9.dataset4 > node10.inp
+node9.map2 > node10.map3
+node9.ignore_flag4 > node10.ignore_flag5
+node10.ans > node11.token
+

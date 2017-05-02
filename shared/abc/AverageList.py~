@@ -1,0 +1,27 @@
+from calvin.actor.actor import Actor, condition
+from calvin.runtime.north.calvin_token import ExceptionToken
+
+class AverageList(Actor):
+
+    """
+    Divides input on port 'dividend' with input on port 'divisor'
+    Inputs :
+        tempp11 : int
+    Output :
+        ip:string
+    """
+
+    def init(self):
+        pass
+
+    @condition(action_input=['tempp11'], action_output=['ip'])
+    def avg(self, temperatures):
+        if(temperatures != 'ignore'):
+            self.result = sum(temperatures)/ len(temperatures)
+        else:
+            self.result = ExceptionToken("Division by 0")
+        return production=(self.result,)
+        #print(str(self.result),str(temperatures), str(self.counter))
+
+
+    action_priority = (avg,)

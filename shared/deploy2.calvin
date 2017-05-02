@@ -1,0 +1,41 @@
+/*
+This file specifies the ip->op mappings of the actors and
+forms an applications graph across multiple runtimes
+*/
+
+
+#Actors specs
+node0 : Input.Emitter()
+node1 : Math.StreamToBatch(window_size = 15)
+node9 : Math.AverageList()
+node2 : Input.Emitter()
+node3 : Math.StreamToBatch(window_size = 15)
+node10 : Math.AverageList()
+node4 : Input.Emitter()
+node5 : Math.StreamToBatch(window_size = 15)
+node11 : Math.AverageList()
+node6: Math.Avg()
+node7 : Input.BuildTree()
+node8 : io.Print()
+
+node0.data > node1.temp1
+node1.result > node9.tempp
+node9.ip > node9 : Math.AverageList()
+node2.data > node3.temp1
+node3.result > node6.temm2
+node4.data > node5.temp1
+node5.result > node6.temm3
+node6.op > node7.input
+node7.output > node8.token
+
+node0.data > node1.temp3
+node1.result2 > node9.tempp11
+node9.ip > node3.temp1
+node2.data > node3.temp3
+node3.result2 > node10.tempp11
+node10.ip> node6.temm2
+node4.data > node5.temp3
+node5.result2 > node11.tempp11
+node11.ip > node6.temm3
+node6.op > node7.input
+node7.output > node8.token

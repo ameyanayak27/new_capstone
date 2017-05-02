@@ -1,0 +1,13 @@
+{
+    "requirements": {
+        "node0":[{"op":"node_attr_match","kwargs":{"index":["node_name",{"name":"runtime-0"}]},"type":"+"}],
+        "node1":[{"op":"node_attr_match","kwargs":{"index":["node_name",{"name":"runtime-0"}]},"type":"+"}],
+        "node2":[{"op":"node_attr_match","kwargs":{"index":["node_name",{"name":"runtime-1"}]},"type":"+"}],
+        "node3":[{"op":"node_attr_match","kwargs":{"index":["node_name",{"name":"runtime-1"}]},"type":"+"}],
+        "node4":[{"op":"node_attr_match","kwargs":{"index":["node_name",{"name":"runtime-2"}]},"type":"+"}],
+        "node5":[{"op":"node_attr_match","kwargs":{"index":["node_name",{"name":"runtime-2"}]},"type":"+"}],
+        "node6":[{"op":"node_attr_match","kwargs":{"index":["node_name",{"name":"runtime-2"}]},"type":"+"}],
+        "node7":[{"op":"node_attr_match","kwargs":{"index":["node_name",{"name":"runtime-3"}]},"type":"+"}],
+        "node8":[{"op":"node_attr_match","kwargs":{"index":["node_name",{"name":"runtime-3"}]},"type":"+"}]
+    }
+}
